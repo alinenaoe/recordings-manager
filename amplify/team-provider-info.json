@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-recordingsmanager-dev-150804-authRole",
+      "UnauthRoleArn": "arn:aws:iam::006032504665:role/amplify-recordingsmanager-dev-150804-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::006032504665:role/amplify-recordingsmanager-dev-150804-authRole",
+      "Region": "eu-west-2",
+      "DeploymentBucketName": "amplify-recordingsmanager-dev-150804-deployment",
+      "UnauthRoleName": "amplify-recordingsmanager-dev-150804-unauthRole",
+      "StackName": "amplify-recordingsmanager-dev-150804",
+      "StackId": "arn:aws:cloudformation:eu-west-2:006032504665:stack/amplify-recordingsmanager-dev-150804/a732f790-4480-11eb-81fc-0a24f54ba32e",
+      "AmplifyAppId": "d2p68apl8y5uct"
+    },
+    "categories": {
+      "auth": {
+        "recordingsmanager5b1097be": {}
+      }
+    }
+  }
+}

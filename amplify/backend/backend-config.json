@@ -1,0 +1,10 @@
+{
+  "auth": {
+    "recordingsmanager5b1097be": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
+    }
+  }
+}
