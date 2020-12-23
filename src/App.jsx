@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import Amplify, { API, graphqlOperation } from 'aws-amplify';
 import awsconfig from './aws-exports';
-import { AmplifySignOut, withAuthenticator } from '@aws-amplify/ui-react';
+import { withAuthenticator } from '@aws-amplify/ui-react';
 
 import { listRecordings } from './graphql/queries';
+import { updateRecording } from './graphql/mutations';
 
-import { IconButton, Paper } from '@material-ui/core';
-import { Favorite, PlayArrow } from '@material-ui/icons';
+import RecordingItem from './components/RecordingItem';
+import Header from './components/Header';
 import './App.css';
 
 
@@ -30,33 +31,38 @@ function App() {
     }
   }
 
+  const handleAddLike = async (id) => {
+    try { 
+      const recording = recordings.find(item => item.id === id);
+
+      recording.like++;
+      delete recording.createdAt;
+      delete recording.updatedAt;
+
+      const recordingData = await API.graphql(graphqlOperation(updateRecording, {
+        input: recording
+      }));
+
+      const recordingsList = [...recordings];
+      recordingsList.map(item => item.id === id 
+        ? recordingData.data.updateRecording
+        : item
+      );
+
+      setRecordings(recordingsList)
+
+    } catch(error) {
+
+    }
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-         <AmplifySignOut />
-         <h2>App Content</h2>  
-      </header>
+      <Header />
 
       <div className="recordingsList">
         { recordings.map(recording => (
-            <Paper variant="outlined" elevation={2} key={recording.id}>
-              <div className="recordingCard">
-                <IconButton aria-label="play">
-                  <PlayArrow />
-                </IconButton>
-                <div>
-                  <div className="title">{recording.title}</div>
-                  <div className="interviewee">{recording.interviewee}</div>
-                </div>
-                <div>
-                  <IconButton aria-label="like">
-                    <Favorite />
-                  </IconButton>
-                  {recording.like}
-                </div>
-              </div>
-              <div className="description">{recording.description}</div>
-            </Paper>
+          <RecordingItem recording={recording} handleAddLike={handleAddLike} />
         )) }
       </div>
     </div>
