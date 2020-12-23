@@ -1,0 +1,11 @@
+{
+  "AppSyncApiName": "recordingsAPI",
+  "DynamoDBBillingMode": "PAY_PER_REQUEST",
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthCognitoUserPoolId": {
+    "Fn::GetAtt": [
+      "authrecordingsmanager5b1097be",
+      "Outputs.UserPoolId"
+    ]
+  }
+}
